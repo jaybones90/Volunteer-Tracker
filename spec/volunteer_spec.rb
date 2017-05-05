@@ -55,4 +55,15 @@ describe(Volunteer) do
       expect(test_volunteer1.name).to(eq("Dennis Rodman"))
     end
   end
+
+  describe('#delete') do
+    it('deletes a specific volunteer from the database') do
+      test_volunteer1 = Volunteer.new({:name => "Macho Man Randy Savage"})
+      test_volunteer1.save
+      test_volunteer2 = Volunteer.new({:name => "Dennis Rodman"})
+      test_volunteer2.save
+      test_volunteer1.delete
+      expect(Volunteer.all).to(eq([test_volunteer2]))
+    end
+  end
 end
