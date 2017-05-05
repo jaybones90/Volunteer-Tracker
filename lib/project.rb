@@ -9,9 +9,25 @@ class Project
   end
 
   def Project.all
-    []
+    projects = []
+    found_projects = DB.exec("SELECT * FROM projects;")
+    found_projects.each do |project|
+      name = project['name']
+      description = project['description']
+      id = project['id']
+      projects.push(Project.new({:name => name, :description => description, :id => id}))
+    end
+    projects
   end
 
+  def save
+    result = DB.exec("INSERT INTO projects (name, description) VALUES ('#{@name}', '#{@description}') RETURNING id;")
+    @id = result.first['id'].to_i
+  end
+
+  def == (another_project)
+    self.name == another_project.name && self.description == another_project.description
+  end
 
 
 
