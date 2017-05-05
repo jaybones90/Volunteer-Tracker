@@ -47,5 +47,15 @@ describe(Project) do
     end
   end
 
+  describe('.find') do
+    it('returns a specific project based on its id') do
+      test_project1 = Project.new({:name => "Tiny Homes", :description => "Building tiny homes for the homeless"})
+      test_project1.save
+      test_project2 = Project.new({:name => "Soaring Eagle", :description => "Creating a cheap and easy alert system to inform homeless about potential job opportunities"})
+      test_project2.save
+      expect(Project.find(test_project1.id)).to(eq(test_project1))
+    end
+  end
+
 
 end

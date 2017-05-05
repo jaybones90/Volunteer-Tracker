@@ -14,7 +14,7 @@ class Project
     found_projects.each do |project|
       name = project['name']
       description = project['description']
-      id = project['id']
+      id = project['id'].to_i
       projects.push(Project.new({:name => name, :description => description, :id => id}))
     end
     projects
@@ -27,6 +27,14 @@ class Project
 
   def == (another_project)
     self.name == another_project.name && self.description == another_project.description
+  end
+
+  def Project.find (id)
+    Project.all.each do |project|
+      if project.id == id
+        return project
+      end
+    end
   end
 
 
