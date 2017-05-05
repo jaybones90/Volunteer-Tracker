@@ -36,4 +36,14 @@ describe(Volunteer) do
       expect(test_volunteer1 == test_volunteer2).to(eq(true))
     end
   end
+
+  describe('.find') do
+    it('find a specific volunteers based on its id') do
+      test_volunteer1 = Volunteer.new({:name => "Macho Man Randy Savage"})
+      test_volunteer1.save
+      test_volunteer2 = Volunteer.new({:name => "Dennis Rodman"})
+      test_volunteer2.save
+      expect(Volunteer.find(test_volunteer1.id)).to(eq(test_volunteer1))
+    end
+  end
 end
