@@ -57,5 +57,25 @@ describe(Project) do
     end
   end
 
+  describe('#update') do
+    it('updates a specific project in the database') do
+      test_project = Project.new({:name => "Tiny Homes", :description => "Building tiny homes for the homeless"})
+      test_project.save
+      test_project.update({:name => "Soaring Eagle", :description => "Creating a cheap and easy alert system to inform homeless about potential job opportunities"})
+      expect(test_project.description).to(eq("Creating a cheap and easy alert system to inform homeless about potential job opportunities"))
+    end
+  end
+
+  describe('#delete') do
+    it('deletes a project from the database') do
+      test_project = Project.new({:name => "Tiny Homes", :description => "Building tiny homes for the homeless"})
+      test_project.save
+      test_project2 = Project.new({:name => "Soaring Eagle", :description => "Creating a cheap and easy alert system to inform homeless about potential job opportunities"})
+      test_project2.save
+      test_project.delete
+      expect(Project.all).to(eq([test_project2]))
+    end
+  end
+
 
 end
