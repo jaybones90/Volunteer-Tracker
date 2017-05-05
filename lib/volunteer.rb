@@ -49,8 +49,9 @@ class Volunteer
   def add_project (project)
     found_project = DB.exec("SELECT * FROM projects WHERE id = #{project.id};")
     @project_id = found_project.first['id'].to_i
-    DB.exec("UPDATE volunteers SET project_id = #{@project_id} WHERE id = #{self.id};")
+    DB.exec("UPDATE volunteers SET project_id = #{@project_id} WHERE id = #{self.id.to_i};")
   end
+
 
 
 

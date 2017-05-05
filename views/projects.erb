@@ -1,0 +1,21 @@
+<form action="/projects/new" method="post">
+  <label for="project_name">Name Of Your Project:</label>
+  <input id="project_name" type="text" name="project_name">
+  <br>
+  <label for="project_description">Description:</label>
+  <br>
+  <textarea name="project_description" rows="8" cols="60"></textarea>
+  <button type="submit">Submit</button>
+</form>
+
+
+<h3>Here is a list of all the current projects:</h3>
+<% if @all_projects.any? %>
+  <% @all_projects.each do |project| %>
+  <ul>
+    <a href="/project/<%= project.id %>"><%= project.name %></a>
+  </ul>
+  <% end %>
+<% else %>
+  <p>There are no projects yet! </p>
+<% end %>

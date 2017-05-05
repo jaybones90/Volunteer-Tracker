@@ -1,0 +1,12 @@
+<h3>Edit your <%= @project.name %> project</h3>
+
+<form action="/project/<%=@project.id%>/edit" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="project_name">Rename Your Project:</label>
+  <input id="project_name" type="text" name="project_name">
+  <br>
+  <label for="project_description">New Description:</label>
+  <br>
+  <textarea name="project_description" rows="8" cols="60"></textarea>
+  <button type="submit">Submit</button>
+</form>

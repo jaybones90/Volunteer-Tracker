@@ -1,0 +1,19 @@
+<h1> <%= @project.name %> </h1>
+
+<p>Project Description: <br> <%= @project.description %> </p>
+
+<a href="/project/<%=@project.id%>/add_volunteer">Add A Volunteer To This Project</a>
+
+<br>
+
+<a href="/project/<%= @project.id %>/edit">Edit This Project</a>
+
+<br>
+
+<a href="/project/<%=@project.id%>/volunteers">See All The Volunteers Currently Assigned To This Project</a>
+
+
+<form action="/project/<%= @project.id%>" method="post">
+  <input name="_method" type="hidden" value="delete">
+  <button type="submit">Delete list</button>
+</form>
