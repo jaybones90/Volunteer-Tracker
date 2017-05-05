@@ -66,4 +66,16 @@ describe(Volunteer) do
       expect(Volunteer.all).to(eq([test_volunteer2]))
     end
   end
+
+  describe('#add_project') do
+    it('adds a project to a specific volunteer') do
+      test_project = Project.new({:name => "Tiny Homes", :description => "Building tiny homes for the homeless"})
+      test_project.save
+      macho_man = Volunteer.new({:name => "Macho Man Randy Savage"})
+      macho_man.save
+      macho_man.add_project(test_project)
+      expect(macho_man.project_id).to(eq(test_project.id))
+    end
+  end
+
 end

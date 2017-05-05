@@ -77,5 +77,20 @@ describe(Project) do
     end
   end
 
+  describe('#see_volunteers') do
+    it('will return all the volunteers for a specific project') do
+      test_project = Project.new({:name => "Tiny Homes", :description => "Building tiny homes for the homeless"})
+      test_project.save
+      macho_man = Volunteer.new({:name => "Macho Man Randy Savage"})
+      macho_man.save
+      rodman = Volunteer.new({:name => "Dennis Rodman"})
+      rodman.save
+      macho_man.add_project(test_project)
+      rodman.add_project(test_project)
+      expect(test_project.see_volunteers).to(eq([macho_man, rodman]))
+    end
+  end
+
+
 
 end

@@ -1,0 +1,25 @@
+describe('#add_volunteer') do
+  it('adds a volunteer to a specific project') do
+    test_project = Project.new({:name => "Tiny Homes", :description => "Building tiny homes for the homeless"})
+    test_project.save
+    macho_man = Volunteer.new({:name => "Macho Man Randy Savage"})
+    macho_man.save
+    rodman = Volunteer.new({:name => "Dennis Rodman"})
+    rodman.save
+    test_project.add_volunteer({:volunteer_ids => [macho_man.id, rodman.id]})
+    expect(test_project.see_project_volunteers).to(eq([macho_man, rodman]))
+  end
+end
+
+describe('#see_project_volunteers') do
+  it('will return all the volunteers for a specific project') do
+    test_project = Project.new({:name => "Tiny Homes", :description => "Building tiny homes for the homeless"})
+    test_project.save
+    macho_man = Volunteer.new({:name => "Macho Man Randy Savage"})
+    macho_man.save
+    rodman = Volunteer.new({:name => "Dennis Rodman"})
+    rodman.save
+    test_project.add_volunteer({:volunteer_ids => [macho_man.id, rodman.id]})
+    expect(test_project.see_project_volunteers).to(eq([macho_man, rodman]))
+  end
+end

@@ -1,10 +1,11 @@
 class Volunteer
 
-  attr_accessor(:id, :name)
+  attr_accessor(:id, :name, :project_id)
 
   def initialize (attributes)
     @name = attributes[:name]
     @id = attributes[:id]
+    @project_id = attributes[:project_id]
   end
 
   def Volunteer.all
@@ -13,7 +14,8 @@ class Volunteer
     found_volunteers.each do |volunteer|
       name = volunteer['name']
       id = volunteer['id']
-      volunteers.push(Volunteer.new({:name => name, :id => id}))
+      project_id = volunteer['project_id']
+      volunteers.push(Volunteer.new({:id => id, :name => name, :project_id => project_id}))
     end
     volunteers
   end
@@ -44,6 +46,11 @@ class Volunteer
     DB.exec("DELETE FROM volunteers WHERE id = #{self.id};")
   end
 
+  def add_project (project)
+    found_project = DB.exec("SELECT * FROM projects WHERE id = #{project.id};")
+    @project_id = found_project.first['id'].to_i
+    DB.exec("UPDATE volunteers SET project_id = #{@project_id} WHERE id = #{self.id};")
+  end
 
 
 
