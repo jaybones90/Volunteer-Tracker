@@ -18,4 +18,22 @@ describe(Volunteer) do
       expect(Volunteer.all).to(eq([]))
     end
   end
+
+  describe('#save') do
+    it('will save the volunteer to the database') do
+      test_volunteer = Volunteer.new({:name => "Macho Man Randy Savage"})
+      test_volunteer.save
+      expect(Volunteer.all).to(eq([test_volunteer]))
+    end
+  end
+
+  describe('#==') do
+    it('will return true if the volunteer name and class is the same') do
+      test_volunteer1 = Volunteer.new({:name => "Macho Man Randy Savage"})
+      test_volunteer1.save
+      test_volunteer2 = Volunteer.new({:name => "Macho Man Randy Savage"})
+      test_volunteer2.save
+      expect(test_volunteer1 == test_volunteer2).to(eq(true))
+    end
+  end
 end
