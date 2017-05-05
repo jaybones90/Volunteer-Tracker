@@ -86,7 +86,8 @@ end
 
 post('/project/:id/add_volunteer') do
   name = params.fetch('name')
-  volunteer = Volunteer.new({:name => name}).save
+  id = Volunteer.new({:name => name}).save
+  volunteer = Volunteer.find(id)
   project = Project.find(params.fetch('id').to_i)
 
   volunteer.add_project(project)
