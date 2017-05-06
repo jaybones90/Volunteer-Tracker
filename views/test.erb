@@ -1,5 +1,7 @@
 <h1><%= @project.name %></h1>
 
  <% @volunteers.each do |volunteer|%>
- <%= volunteer.name %>
+ <ul>
+   <li>   <%= volunteer.name %></li>
+ </ul>
  <% end %>
