@@ -31,7 +31,7 @@ class Project
 
   def Project.find (id)
     Project.all.each do |project|
-      if project.id == id
+      if project.id == id.to_i
         return project
       end
     end
@@ -53,9 +53,9 @@ class Project
     results = DB.exec("SELECT * FROM volunteers WHERE project_id = #{self.id};")
     results.each do |result|
       id = result.fetch('id').to_i
-      volunteer = DB.exec("SELECT * FROM volunteers WHERE id = #{id};")
-      name = volunteer.first.fetch('name')
-      project_volunteers.push(Volunteer.new({:name => name, :id => id}))
+      name = result.fetch('name')
+      project_id = result.fetch('project_id')
+      project_volunteers.push(Volunteer.new({:name => name, :id => id, :project_id => project_id}))
     end
     project_volunteers
   end

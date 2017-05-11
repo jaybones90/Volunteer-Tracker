@@ -3,6 +3,7 @@
 
 <h3>Add A New Volunteer To Your Project:</h3>
 <form action="/project/<%=@project.id%>/add_volunteer" method="post">
+  <input type="hidden" name="project_id" value="<%=@project.id%>">
   <label for="name">Enter Your Name</label>
   <input type="text" name="name">
   <button type="submit">Submit</button>

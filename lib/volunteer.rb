@@ -31,28 +31,22 @@ class Volunteer
 
   def Volunteer.find (id)
     Volunteer.all.each do |volunteer|
-      if volunteer.id = id
+      if volunteer.id.to_i == id.to_i
         return volunteer
       end
     end
   end
 
   def update (attributes)
-    @name = attributes[:name]
-    DB.exec("UPDATE volunteers SET name = '#{@name}' WHERE id = #{self.id};")
+    name = attributes[:name]
+    project_id = attributes[:project_id]
+    DB.exec("UPDATE volunteers SET name = '#{name}' WHERE id = #{self.id};")
+    DB.exec("UPDATE volunteers SET project_id = #{project_id} WHERE id = #{self.id}")
   end
 
   def delete
     DB.exec("DELETE FROM volunteers WHERE id = #{self.id};")
   end
-
-  def add_project (project)
-    found_project = DB.exec("SELECT * FROM projects WHERE id = #{project.id};")
-    @project_id = found_project.first['id'].to_i
-    DB.exec("UPDATE volunteers SET project_id = #{@project_id} WHERE id = #{self.id.to_i};")
-  end
-
-
 
 
 end

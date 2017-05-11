@@ -23,7 +23,7 @@ end
 post('/projects/new') do
   name = params.fetch('project_name')
   description = params.fetch('project_description')
-  new_project = Project.new({:name => name, :description => description}).save
+  Project.new({:name => name, :description => description}).save
   @all_projects = Project.all
   erb(:index)
 end
@@ -63,18 +63,27 @@ get('/volunteers') do
   erb(:volunteers)
 end
 
-post('/volunteers/new') do
-  name = params.fetch('name')
-  new_volunteer = Volunteer.new({:name => name}).save
-  @all_volunteers = Volunteer.all
-  erb(:volunteers)
-end
+
 
 get('/volunteer/:id') do
+  @all_projects = Project.all
   @volunteer = Volunteer.find(params.fetch('id').to_i)
   erb(:volunteer)
 end
 
+patch('/volunteer/:id/add_project') do
+  @all_projects = Project.all
+  project = Project.find(params.fetch('project_id'))
+  volunteer = Volunteer.find(params['id'])
+  volunteer.update(name: volunteer.name, project_id: project.id)
+  redirect("/")
+end
+
+delete('/volunteer/:id/delete') do
+  @volunteer = Volunteer.find(params.fetch('id').to_i)
+  @volunteer.delete
+  erb(:volunteer_delete)
+end
 
 ##############################################################
 
@@ -84,20 +93,14 @@ get('/project/:id/add_volunteer') do
   erb(:add_volunteer_form)
 end
 
-post('/project/:id/add_volunteer') do
+post('/volunteer/add') do
   name = params.fetch('name')
-  id = Volunteer.new({:name => name}).save
-  volunteer = Volunteer.find(id)
-  project = Project.find(params.fetch('id').to_i)
-
-  volunteer.add_project(project)
-  @all_projects = Project.all
-  erb(:index)
+  Volunteer.new({:name => name}).save
+  redirect('/')
 end
 
 get('/project/:id/volunteers') do
   @project = Project.find(params.fetch('id').to_i)
   @volunteers = @project.see_volunteers
-
   erb(:test)
 end

@@ -2,7 +2,6 @@
 
 <p>Project Description: <br> <%= @project.description %> </p>
 
-<a href="/project/<%=@project.id%>/add_volunteer">Add A Volunteer To This Project</a>
 
 <br>
 
@@ -15,5 +14,5 @@
 
 <form action="/project/<%= @project.id%>" method="post">
   <input name="_method" type="hidden" value="delete">
-  <button type="submit">Delete list</button>
+  <button type="submit">Delete Project</button>
 </form>

@@ -1,19 +1,26 @@
 <h1>Volunteers</h1>
 
-<h3>Add A New Volunteer:</h3>
-<form action="/volunteers/new" method="post">
-  <label for="name">Enter Your Name</label>
-  <input type="text" name="name">
-  <button type="submit">Submit</button>
-</form>
+
 
 <h3>Here is a list of all the current volunteers:</h3>
 <% if @all_volunteers.any? %>
   <% @all_volunteers.each do |volunteer| %>
   <ul>
     <a href="/volunteer/<%= volunteer.id %>"><%= volunteer.name %></a>
+    <form  action="/volunteer/<%=volunteer.id%>/delete" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit" class="btn btn-danger" name="button">Delete</button>
+    </form>
   </ul>
+
   <% end %>
 <% else %>
   <p>There are no volunteers yet! </p>
 <% end %>
+
+<h3>Add A New Volunteer:</h3>
+<form action="/volunteer/add" method="post">
+  <label for="name">Enter Your Name</label>
+  <input type="text" name="name">
+  <button type="submit">Submit</button>
+</form>

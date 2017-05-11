@@ -1,1 +1,17 @@
 <h1> <%= @volunteer.name %> </h1>
+
+<h3>Add a project to this volunteer:</h3>
+<form action="/volunteer/<%=@volunteer.id%>/add_project" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <select  id="project_id" name="project_id" type="text">
+  <% @all_projects.each do |project| %>
+    <option value="<%=project.id%>"><%=project.name%></option>
+    <% end %>
+  </select>
+<button type="submit">Submit</button>
+</form>
+
+<h3>The project this volunteer is currently assigned to:</h3>
+<% @project = Project.find(@volunteer.project_id)%>
+
+<p><%= @project.name %></p>
