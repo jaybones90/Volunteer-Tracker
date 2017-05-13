@@ -46,7 +46,7 @@ The program should then be linked with the proper databases and run as expected
 |----------|:--------:|:--------:|
 
 ## Known Issues
-* Currently is not sucessful at adding a volunteer to a specific project
+* no known issues at this time
 
 
 ## Authors

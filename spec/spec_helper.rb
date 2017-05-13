@@ -1,9 +1,10 @@
 require('rspec')
 require('pg')
-require('capybara')
 require('pry')
+require('capybara')
 require('project')
 require('volunteer')
+
 
 DB = PG.connect({:dbname => 'volunteer_tracker_test'})
 
