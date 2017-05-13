@@ -10,11 +10,3 @@
   </select>
 <button type="submit">Submit</button>
 </form>
-
-<h3>The project this volunteer is currently assigned to:</h3>
-<% if @project.nil? %>
-<% @project = Project.find(@volunteer.project_id)%>
-<p><%= @project.name %></p>
-<% else %>
-<h4>There Are No Projects Assigned To This Volunteer</h4>
-<% end %>

@@ -68,6 +68,7 @@ end
 get('/volunteer/:id') do
   @all_projects = Project.all
   @volunteer = Volunteer.find(params.fetch('id').to_i)
+  @project = Project.find(@volunteer.project_id)
   erb(:volunteer)
 end
 
