@@ -72,6 +72,20 @@ get('/volunteer/:id') do
   erb(:volunteer)
 end
 
+get ("/volunteer/:id/edit") do
+  @volunteer = Volunteer.find(params['id'].to_i)
+  erb(:edit_volunteer_form)
+end
+
+patch ("/volunteer/:id/edit") do
+  volunteer = Volunteer.find(params['id'].to_i)
+  name = params['name']
+  volunteer.update({:name => name, :project_id => volunteer.project_id})
+  redirect("/")
+end
+
+
+
 patch('/volunteer/:id/add_project') do
   @all_projects = Project.all
   project = Project.find(params.fetch('project_id'))
