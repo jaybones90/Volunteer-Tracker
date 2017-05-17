@@ -1,4 +1,8 @@
-require('spec_helper')
+require "capybara/rspec"
+require "./app"
+require "pry"
+Capybara.app = Sinatra::Application
+set(:show_exceptions, false)
 
 describe("the index page path for entering a new project", {:type => :feature}) do
   it("lets the user create new project") do
@@ -15,8 +19,10 @@ describe("the index page path for entering a new project", {:type => :feature}) 
     click_link("Projects")
     fill_in("Name Of Your Project", :with => "Monkey")
     click_button("Submit")
+    click_link("Monkey")
     click_link("Edit This Project")
-    fill_in("Rename Your Project", :with => "Potato")
+    fill_in("project_name", :with => "Potato")
+    click_button("Submit")
     expect(page).to have_content("Potato")
   end
 end
@@ -24,7 +30,7 @@ describe("the index page path for entering a new volunteer", {:type => :feature}
   it("lets the user create new volunteer") do
     visit('/')
     click_link("Volunteers")
-    fill_in("Enter Your Name", :with => "Jason")
+    fill_in("name", :with => "Jason")
     click_button("Submit")
     click_link("Volunteers")
     expect(page).to have_content("Jason")
@@ -34,10 +40,10 @@ describe("the index page path for entering a new volunteer", {:type => :feature}
   it("lets the user create new volunteer") do
     visit('/')
     click_link("Volunteers")
-    fill_in("Enter Your Name", :with => "Jason")
+    fill_in("name", :with => "Jason")
     click_button("Submit")
     click_link("Volunteers")
     click_link("Jason")
-    expect(page).to have_content("Add A Project To This Volunteer")
+    expect(page).to have_content("Add a project to this volunteer")
   end
 end

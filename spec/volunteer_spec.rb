@@ -47,15 +47,6 @@ describe(Volunteer) do
     end
   end
 
-  describe('#update') do
-    it('updates a volunteer') do
-      test_project = Project.new({:name => "Build Houses"})
-      test_volunteer1 = Volunteer.new({:name => "Macho Man Randy Savage"})
-      test_volunteer1.save
-      test_volunteer1.update({:name => "Dennis Rodman", :project_id => test_project.id.to_i})
-      expect(test_volunteer1.name).to(eq("Dennis Rodman"))
-    end
-  end
 
   describe('#delete') do
     it('deletes a specific volunteer from the database') do
